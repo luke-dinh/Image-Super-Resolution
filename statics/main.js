@@ -55,13 +55,22 @@ $(document).ready(function(){
             cache: false,
             processData: false,
             async: true,
-            success: function (data) {
-                // Get and display the result
-                $('.loader').hide();
-                $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
-                console.log('Success!');
-            },
+            // success: function (data) {
+            //     // Get and display the result
+            //     $('.loader').hide();
+            //     $('#result').fadeIn(600);
+            //     $('#result').text(' Result:  ' + data);
+            //     console.log('Success!');
+            // },
+            success: function show_image(data, width, height, alt){
+                var img = document.createElement("img");
+                img.data = data
+                img.width = width;
+                img.height = height;
+                img.alt = alt;
+
+                document.body.appendChild(img);
+            }
         });
     });
 
