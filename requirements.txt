@@ -1,3 +1,5 @@
 torch
 torchvision
 flask
+werkzeug
+gevent
