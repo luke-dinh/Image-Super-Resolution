@@ -16,6 +16,7 @@ from gevent.pywsgi import WSGIServer
 
 # Define app
 app = Flask(__name__)
+print('Check http://127.0.0.1:5000')
 
 # Global Variables
 parser = argparse.ArgumentParser(description='Test Single Image')
@@ -76,7 +77,7 @@ def upload():
         file_path = os.path.join(basepath, 'uploads', secure_filename(f.filename))
         f.save(file_path)
 
-        if str(file_path).endswith('png'):
+        if str(file_path).endswith('.png'):
             model_dir = DIR
             result = generate_img(model = model, model_dir=model_dir, image_name=file_path)
         else:
