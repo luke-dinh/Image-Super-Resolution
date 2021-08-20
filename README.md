@@ -21,3 +21,21 @@ We modified the G block architecture from the previous model for better training
   <img src = "https://user-images.githubusercontent.com/51883796/130203219-1528644a-2397-405b-a3a6-82844fc01e41.png">
 </p>
 
+## 3. Usage
+
+* ### For non-API usage:
+
+### Using with images:
+
+```
+pip3 install requirements.txt
+cd mSRGAN
+python3 test_image.py --image_name = "YOUR IMAGE PATH"
+```
+### Using with video:
+
+```
+pip3 install requirements.txt
+cd mSRGAN
+python3 test_video.py --video_name = "YOUR VIDEO PATH"
+```
