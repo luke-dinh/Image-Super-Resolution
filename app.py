@@ -34,9 +34,27 @@ DIR = opt.directory
 
 model = model.Generator(UPSCALE_FACTOR).eval()
 
-def load_model(model, image_name):
+def load_model(model, model_dir):
     if TEST_MODE:
         model.cuda()
-        model.load_state_dict(torch.load(DIR + MODEL_NAME))
+        model.load_state_dict(torch.load(model_dir + MODEL_NAME))
     else:
-        model.load_state_dict(torch.load(DIR + MODEL_NAME, map_location=lambda storage, loc:storage))
+        model.load_state_dict(torch.load(model_dir + MODEL_NAME, map_location=lambda storage, loc:storage))
+
+def generate_img(model, image_name):
+    image = Image.open(image_name)
+    with torch.no_grad():
+        image = Variable(ToTensor()(image)).unsqueeze(0)
+    if TEST_MODE:
+        image = image.cuda()
+    
+    img_out = load_model(model=model, model_dir=DIR)
+    out_img = ToPILImage()(img_out[0].data.cpu())
+
+    return out_img
+
+@app.route('/', methods = ['GET'])
+
+def index():
+    return flask.render_template("index.html")
+
