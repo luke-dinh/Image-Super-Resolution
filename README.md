@@ -18,6 +18,6 @@ The whole framework: A GAN-based model (mSRGAN) is used to train the model. Afte
 We modified the G block architecture from the previous model for better training and lowwer weights. The architecture of the block is shown as below (for training and usage): 
 
 <p align = "center">
-  <img src = "https://user-images.githubusercontent.com/51883796/129872846-496d1162-2cc0-443a-99b8-18f308cc286e.png">
+  <img src = "https://user-images.githubusercontent.com/51883796/130203219-1528644a-2397-405b-a3a6-82844fc01e41.png">
 </p>
 

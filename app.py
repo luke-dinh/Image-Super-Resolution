@@ -66,7 +66,7 @@ def generate_img(model, model_dir, image_name):
 def index():
     return flask.render_template("index.html")
 
-@app.route('/predict', methods = ['GET', 'POST'])
+@app.route('/predict', methods = ['GET','POST'])
 
 def upload():
     if flask.request.method == 'POST':
