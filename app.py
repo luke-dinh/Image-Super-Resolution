@@ -14,10 +14,6 @@ from flask import Flask
 from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
 
-# Define app
-app = Flask(__name__)
-print('Check http://127.0.0.1:5000')
-
 # Global Variables
 parser = argparse.ArgumentParser(description='Test Single Image')
 parser.add_argument('--upscale_factor', default=4, type=int, help='super resolution upscale factor')
@@ -36,6 +32,10 @@ MODEL_NAME_CELEBA = opt.model_name_celeba
 DIR = opt.directory
 
 model = model.Generator(UPSCALE_FACTOR).eval()
+
+# Define app
+app = Flask(__name__)
+print('Check http://127.0.0.1:5000')
 
 # def load_model(model, model_dir):
 #     if TEST_MODE:
