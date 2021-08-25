@@ -55,5 +55,4 @@ else:
     resultt = load_image(model=model, model_dir=DIR_2, model_name=MODEL_NAME_2, image_name=IMAGE_NAME)
 elapsed = (time.process_time() - start)
 print('cost' + str(elapsed) + 's')
-out_img = ToPILImage()(result[0].data.cpu())
-out_img.save('out_srf_' + str(UPSCALE_FACTOR) + '_' + IMAGE_NAME)
+result.save('out_srf_' + str(UPSCALE_FACTOR) + '_' + IMAGE_NAME)
