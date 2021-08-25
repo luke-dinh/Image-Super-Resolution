@@ -17,7 +17,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Test Single Video')
     parser.add_argument('--upscale_factor', default=4, type=int, help='super resolution upscale factor')
     parser.add_argument('--video_name', type=str, help='test low resolution video name')
-    parser.add_argument('--model_name', default='netG_epoch_4_99.pth', type=str, help='generator model epoch name')
+    parser.add_argument('--model_name', default='netG_epoch_4_100.pth', type=str, help='generator model epoch name')
     opt = parser.parse_args()
 
     UPSCALE_FACTOR = opt.upscale_factor
