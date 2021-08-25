@@ -12,13 +12,17 @@ parser = argparse.ArgumentParser(description='Test Single Image')
 parser.add_argument('--upscale_factor', default=4, type=int, help='super resolution upscale factor')
 parser.add_argument('--test_mode', default='GPU', type=str, choices=['GPU', 'CPU'], help='using GPU or CPU')
 parser.add_argument('--image_name', type=str, help='test low resolution image name')
-parser.add_argument('--model_name', default='netG_epoch_4_49.pth', type=str, help='generator model epoch name')
+parser.add_argument('--model_name', default='netG_epoch_4_100.pth', type=str, help='generator model epoch name')
+parser.add_argument('--model_name_celeba', default='netG_epoch_4_80.pth', type='str', help='generator model for jpg images')
 opt = parser.parse_args()
 
 UPSCALE_FACTOR = opt.upscale_factor
 TEST_MODE = True if opt.test_mode == 'GPU' else False
 IMAGE_NAME = opt.image_name
 MODEL_NAME = opt.model_name
+
+DIR_1 = 'epochs_msrgan'
+DIR_2 = 'epochs_msrgan_celeba'
 
 model = Generator(UPSCALE_FACTOR).eval()
 
