@@ -19,32 +19,29 @@ opt = parser.parse_args()
 UPSCALE_FACTOR = opt.upscale_factor
 TEST_MODE = True if opt.test_mode == 'GPU' else False
 IMAGE_NAME = opt.image_name
-MODEL_NAME = opt.model_name
+MODEL_NAME_1 = opt.model_name
+MODEL_NAME_2 = opt.model_name_celeba
 
 DIR_1 = 'epochs_msrgan'
 DIR_2 = 'epochs_msrgan_celeba'
 
 model = Generator(UPSCALE_FACTOR).eval()
 
-# For images with jpg or jpeg format:
-if TEST_MODE:
-    model.cuda()
-    model.load_state_dict(torch.load('epochs_msrgan_celeba/' + MODEL_NAME))
-else:
-    model.load_state_dict(torch.load('epochs_msrgan_celeba/' + MODEL_NAME, map_location=lambda storage, loc: storage))
+def load_image(model, model_dir, model_name, image_name):
 
-# # For images with png format:
-# if TEST_MODE:
-#     model.cuda()
-#     model.load_state_dict(torch.load('epochs_msrgan/' + MODEL_NAME))
-# else:
-#     model.load_state_dict(torch.load('epochs_msrgan/' + MODEL_NAME, map_location=lambda storage, loc: storage))
+    # For images with jpg or jpeg format:
+    if TEST_MODE:
+        model.cuda()
+        model.load_state_dict(torch.load(model_dir + model_name))
+    else:
+        model.load_state_dict(torch.load(model_dir + model_name, map_location=lambda storage, loc: storage))
 
-image = Image.open(IMAGE_NAME)
-with torch.no_grad():
-  image = Variable(ToTensor()(image)).unsqueeze(0)
-if TEST_MODE:
-    image = image.cuda()
+
+    image = Image.open(IMAGE_NAME)
+    with torch.no_grad():
+        image = Variable(ToTensor()(image)).unsqueeze(0)
+    if TEST_MODE:
+        image = image.cuda()
 
 start = time.process_time()
 out = model(image)
