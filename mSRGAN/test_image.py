@@ -52,7 +52,7 @@ start = time.process_time()
 if str(IMAGE_NAME).endswith('.png'):
     result = load_image(model=model, model_dir=DIR_1, model_name=MODEL_NAME_1, image_name=IMAGE_NAME)
 else:
-    resultt = load_image(model=model, model_dir=DIR_2, model_name=MODEL_NAME_2, image_name=IMAGE_NAME)
+    result = load_image(model=model, model_dir=DIR_2, model_name=MODEL_NAME_2, image_name=IMAGE_NAME)
 elapsed = (time.process_time() - start)
 print('cost' + str(elapsed) + 's')
 result.save('out_srf_' + str(UPSCALE_FACTOR) + '_' + IMAGE_NAME)
