@@ -47,7 +47,7 @@ print('Check http://127.0.0.1:5000')
 
 def generate_img(model, model_dir, model_name, image_name):
 
-    if TEST_MODE:
+    if TEST_MODE == "GPU":
         model.cuda()
         model.load_state_dict(torch.load(model_dir + model_name))
     else:
@@ -56,8 +56,10 @@ def generate_img(model, model_dir, model_name, image_name):
     image = Image.open(image_name)
     with torch.no_grad():
         image = Variable(ToTensor()(image)).unsqueeze(0)
-    if TEST_MODE:
+    if TEST_MODE == "GPU":
         image = image.cuda()
+    else:
+        image=image 
     
     img_out = model(image)
     out_img = ToPILImage()(img_out[0].data.cpu())
