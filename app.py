@@ -1,5 +1,6 @@
 from __future__ import division, print_function
-import os 
+import os
+from flask.wrappers import Response 
 import numpy as np
 import argparse
 
@@ -25,7 +26,7 @@ parser.add_argument('--model_name_celeba', default='netG_epoch_4_80.pth', type=s
 opt = parser.parse_args()
 
 UPSCALE_FACTOR = opt.upscale_factor
-TEST_MODE = True if opt.test_mode == 'GPU' else False
+TEST_MODE = opt.test_mode
 IMAGE_NAME = opt.image_name
 MODEL_NAME = opt.model_name
 MODEL_NAME_CELEBA = opt.model_name_celeba
@@ -86,9 +87,10 @@ def upload():
             new_model_dir = 'mSRGAN/epochs_msrgan_celeba/'
             result = generate_img(model=model, model_dir=new_model_dir, model_name=MODEL_NAME_CELEBA , image_name=file_path)
 
-        return result
-
-    return None
+        try:
+            return Response(response=result, status=200, mimetype='image/png')
+        except FileNotFoundError:
+            os.abort(404)
 
 if __name__ == '__main__':
     app.run(debug=True)
