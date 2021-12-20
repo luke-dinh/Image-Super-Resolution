@@ -26,7 +26,7 @@ parser.add_argument('--model_name_celeba', default='netG_epoch_4_80.pth', type=s
 opt = parser.parse_args()
 
 UPSCALE_FACTOR = opt.upscale_factor
-TEST_MODE = opt.test_mode
+TEST_MODE = True if opt.test_mode else False
 IMAGE_NAME = opt.image_name
 MODEL_NAME = opt.model_name
 MODEL_NAME_CELEBA = opt.model_name_celeba
@@ -47,7 +47,7 @@ print('Check http://127.0.0.1:5000')
 
 def generate_img(model, model_dir, model_name, image_name):
 
-    if TEST_MODE == "GPU":
+    if TEST_MODE:
         model.cuda()
         model.load_state_dict(torch.load(model_dir + model_name))
     else:
@@ -56,10 +56,8 @@ def generate_img(model, model_dir, model_name, image_name):
     image = Image.open(image_name)
     with torch.no_grad():
         image = Variable(ToTensor()(image)).unsqueeze(0)
-    if TEST_MODE == "GPU":
+    if TEST_MODE:
         image = image.cuda()
-    else:
-        image=image 
     
     img_out = model(image)
     out_img = ToPILImage()(img_out[0].data.cpu())
