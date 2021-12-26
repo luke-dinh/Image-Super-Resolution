@@ -39,3 +39,10 @@ pip3 install requirements.txt
 cd mSRGAN
 python3 test_video.py --video_name = "YOUR VIDEO PATH"
 ```
+
+* ### Using via API:
+
+```
+python app.py 
+```
+IP Browser: 0.0.0.1:5000
